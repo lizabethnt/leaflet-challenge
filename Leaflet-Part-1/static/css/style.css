@@ -8,3 +8,33 @@ body,
 html {
   height: 100%;
 }
+/* below is what I've added, suggested by cody AI
+.legend {
+  position: absolute;
+  top: 10px; 
+  right: 10px;
+  padding: 10px;
+  background: white;
+  border: 1px solid black;
+} */
+
+.legend {
+  padding: 100px; 
+  margin: 10px; 
+  background: white; 
+  border: 1px solid black; 
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+
+.legend-square {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
