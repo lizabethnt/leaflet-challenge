@@ -33,12 +33,12 @@ dataPromise.then(function (data) {
               fillColor: chooseColor(coordinates[2]),
               radius: magnitude*7500
             })
-            .bindPopup("<h3>" + `magnitude: ` + magnitude 
-            + "</h3><hr><p>" + `felt?: ` + felt + "</p>"
-            + "</h3><hr><p>" + `location: ` +place + "</p>" 
-            + "</h3><hr><p>" + `coordinates: ` + coordinates + "</p>"
-            + "</h3><hr><p>" + `time: ` + new Date(time) + "</p>");
 
+            marker.bindTooltip("<h3>" + `magnitude: ` + magnitude 
+            // + "</h3><hr><p>" + `felt?: ` + felt + "</p>"
+            + "</h3><hr><p>" + `location: ` +place + "</p>" 
+            + "</h3><hr><p>" + `depth: ` + coordinates[2] + "</p>").openTooltip();
+            // + "</h3><hr><p>" + `time: ` + new Date(time) + "</p>").openTooltip();
             quakeMarkers.push(marker);
     }     
     console.log("quakeMarkers: ", quakeMarkers);
