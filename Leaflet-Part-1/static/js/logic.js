@@ -12,6 +12,7 @@ dataPromise.then(function (data) {
     for(let i = 0; i<quakeData.features.length; i++) {
         let magnitude = quakeData.features[i].properties.mag;
         let place = quakeData.features[i].properties.place;
+        let time = quakeData.features[i].properties.time;
 
         var coordinates = quakeData.features[i].geometry.coordinates;
         function chooseColor(depth) {
@@ -35,8 +36,8 @@ dataPromise.then(function (data) {
             marker.bindTooltip("<h3>" + `magnitude: ` + magnitude 
             // + "</h3><hr><p>" + `felt?: ` + felt + "</p>"
             + "</h3><hr><p>" + `location: ` +place + "</p>" 
-            + "</h3><hr><p>" + `depth: ` + coordinates[2] + "</p>").openTooltip();
-            // + "</h3><hr><p>" + `time: ` + new Date(time) + "</p>").openTooltip();
+            + "</h3><hr><p>" + `depth: ` + coordinates[2] + "</p>"
+            + "</h3><hr><p>" + `time: ` + new Date(time) + "</p>").openTooltip();
             quakeMarkers.push(marker);
     }     
     console.log("quakeMarkers: ", quakeMarkers);
