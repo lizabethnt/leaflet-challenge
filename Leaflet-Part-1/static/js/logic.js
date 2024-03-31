@@ -12,8 +12,7 @@ dataPromise.then(function (data) {
     for(let i = 0; i<quakeData.features.length; i++) {
         let magnitude = quakeData.features[i].properties.mag;
         let place = quakeData.features[i].properties.place;
-        let time = quakeData.features[i].properties.time;
-        let felt = quakeData.features[i].properties.felt;
+
         var coordinates = quakeData.features[i].geometry.coordinates;
         function chooseColor(depth) {
             if (depth >= 90) return "darkred";
@@ -25,8 +24,7 @@ dataPromise.then(function (data) {
           }
         let marker = 
             L.circle([coordinates[1], coordinates[0]], {
-            //   stroke: true,
-              opacity: 1,
+              opacity: .75,
               fillOpacity: .9,
               color: "black",
               weight: 1,
@@ -47,16 +45,8 @@ dataPromise.then(function (data) {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     })
 
-    // Create a baseMaps object.
-    // var baseMaps = {
-    //     "Street Map": street,
-    // };
-
     // Create a layer group for the quake markers.
     var quakes = L.layerGroup(quakeMarkers);
-    // var overlayMaps = {
-    //     "Quakes in past 7 days": quakes,
-    //   };
 
     // Define a map object.
     var myMap = L.map("map", {
@@ -65,7 +55,31 @@ dataPromise.then(function (data) {
         layers: [street, quakes]
     });
 
-// TODO add legend to the map
+    //add legend to the map, written with help from AI and powepoint from TA Henry
+    // add a control positioning the legend on the map
+    var legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function() {
+    // create the div with a class "info legend"
+      var div = L.DomUtil.create('div', 'info legend');
+    // create limits, colors, labels
+      var limits = [-10, 10, 30, 50, 70, 90];
+      var colors = ["lightgreen", "green", "darkgreen", "orange", "red", "darkred"];
+      var labels = ["< 10", "10 to 30", "30 to 50", "50 to 70", "70 to 90", "> 90"];
+    // Create a title for the legend
+      var legendInfo = "<h1>Depth in km</h1>";
+        div.innerHTML = legendInfo;
+    // loop through our limits and generate a label with a colored square for each interval
+      for (var i = 0; i < limits.length; i++) {
+        div.innerHTML +=
+          '<div class="color-box" style="background-color:' + colors[i] + '"></div>' +
+          '<span>' + labels[i] + '</span><br>';
+      }
+    
+      return div;
+    };
+    // add the legend to the map
+    legend.addTo(myMap);
+
 });
 
 
